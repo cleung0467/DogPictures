@@ -7,7 +7,8 @@ class App extends React.Component {
     super();
 
     this.state = {
-      dog: null
+      dog: null,
+      isFetchingDog: false
     };
 
     this.onShowDog = this.onShowDog.bind(this);
@@ -25,6 +26,7 @@ class App extends React.Component {
       });     
   }
   onShowDog() {
+  this.setState ({ isFetchingDog: true});
     this.fetchDog();
   }
 
@@ -35,6 +37,7 @@ class App extends React.Component {
       <div>
         <button onClick={this.onShowDog}>Show me a dog</button>
         <p>{this.state.dog}</p>
+        <p>isFetchingDog: {this.state.isFetchingDog.toString()}</p>
       </div>
     );
   }
