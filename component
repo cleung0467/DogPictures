@@ -1,0 +1,44 @@
+import React from 'react';
+import ReactDom from 'react-dom';
+import './styles.css';
+
+class App extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      dog: null
+    };
+
+    this.onShowDog = this.onShowDog.bind(this);
+  }
+  componentDidMount() {
+    fetch('https://dog.ceo/api/breeds/image/random', {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json'
+    }
+    })
+      .then(response => response.json())
+      .then (json => {
+        this.setState({dog: json.dog});    
+      });     
+  }
+  onShowDog() {
+    this.fetchDog();
+  }
+
+  render() {
+    console.log('---RENDER---');
+
+    return(
+      <div>
+        <button onClick={this.onShowDog}>Show me a dog</button>
+        <p>{this.state.dog}</p>
+      </div>
+    );
+  }
+ 
+}
+const rootElement = document.getElementById('root');
+ReactDOM.render(<App version="1.0" />. rootElement);
